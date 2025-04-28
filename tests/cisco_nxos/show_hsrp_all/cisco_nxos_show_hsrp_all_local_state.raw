@@ -1,0 +1,11 @@
+port-channel34.330 - Group 330 (HSRP-V2) (IPv4)
+  Local state is Initial(Interface Down), priority 255 (Cfged 255), may preempt
+    Forwarding threshold(for vPC), lower: 0 upper: 255
+  Hellotime 3 sec, holdtime 10 sec
+  Virtual IP address is 10.125.1.139 (Cfged)
+  Active router is unknown
+  Standby router is unknown
+  Authentication text "cisco"
+  Virtual mac address is 0000.0c9f.f14a (Default MAC)
+  3 state changes, last state change 1y32w
+  IP redundancy name is hsrp-Po34.330-330 (default)
