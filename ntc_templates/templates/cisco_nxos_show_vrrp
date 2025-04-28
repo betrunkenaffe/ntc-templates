@@ -1,0 +1,34 @@
+Value INTERFACE (\S+)
+Value GROUP_NUMBER (\d+)
+Value DESCRIPTION (.*)
+Value VRRP_ROUTER_STATE (MASTER|BACKUP|INIT \(Interface Down\))
+Value VIRTUAL_IP_ADDRESS (\S+)
+Value SECONDARY_IP_ADDRESS (\S+)
+Value VIRTUAL_MAC_ADDRESS (\S+)
+Value ADVERTISEMENT_INTERVAL (\d+)
+Value PREEMPT (\S+)
+Value PREEMPT_DELAY (\d+)
+Value PRIORITY (\d+)
+Value CONFIGURED_PRIORITY (\d+)
+Value ACTIVE_ROUTER (\S+)
+Value ACTIVE_IP_ADDRESS (\S+)
+Value ACTIVE_PRIORITY (\d+|unknown)
+Value ACTIVE_ADVERTISEMENT_INTERVAL (\d+|unknown)
+
+Start
+  ^${INTERFACE}\s-\sGroup\s${GROUP_NUMBER}\s-\sAddress-Family\sIPv[46]$$
+  ^\s*Description\sis\s"${DESCRIPTION}"$$
+  ^\s*State\sis\s${VRRP_ROUTER_STATE}$$
+  ^\s*State duration .*$$
+  ^\s*Virtual\sIP\saddress\sis\s${VIRTUAL_IP_ADDRESS}$$
+  ^\s*Virtual\ssecondary\sIP\saddresses:$$
+  ^\s*${SECONDARY_IP_ADDRESS}$$
+  ^\s*Virtual\sMAC\saddress\sis\s${VIRTUAL_MAC_ADDRESS}$$
+  ^\s*Advertisement\sinterval\sis\s${ADVERTISEMENT_INTERVAL}\s.*$$
+  ^\s*Preemption\s${PREEMPT},\sdelay\smin\s${PREEMPT_DELAY}\s.*$$
+  ^\s*Priority\sis\s${PRIORITY},\s\(Configured\s${CONFIGURED_PRIORITY}\)$$
+  ^\s*Master\sRouter\sis\s${ACTIVE_IP_ADDRESS}(\s\(${ACTIVE_ROUTER}\))?,\spriority\sis\s${ACTIVE_PRIORITY}$$
+  ^\s*Master\sAdvertisement\sinterval\sis\s${ACTIVE_ADVERTISEMENT_INTERVAL}.*$$
+  ^\s*Master\sDown\sinterval\sis\s.*$$
+  ^\s*$$ -> Record
+  ^. -> Error
